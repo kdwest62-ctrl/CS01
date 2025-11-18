@@ -1,34 +1,21 @@
 import random
 import string
 
-def generate_password(c, l):
-    password = "".join(random.choices(c, k=l))
-    return f"Generate password: {password}"
-
+characters_list = []
 length = int(input("Enter password length: "))
-letters = input("Include letters? (y/n): ")
+upper = input("Include uppercase letters? (y/n): ")
+if upper == "y" or upper == "Y":
+    characters_list.append(string.ascii_uppercase)
+lower = input("Include lowercase letters? (y/n): ")
+if lower == "y" or lower == "Y":
+    characters_list.append(string.ascii_lowercase)
 numbers = input("Include numbers? (y/n): ")
+if numbers == "y" or numbers == "Y":
+    characters_list.append(string.digits)
 special = input("Include special characters? (y/n): ")
-if letters == "y" and numbers == "y" and special == "y":
-    characters = string.ascii_letters + string.digits + string.punctuation
-    print(generate_password(characters, length))
-elif letters == "y" and numbers == "y" and special == "n":
-    characters = string.ascii_letters + string.digits
-    print(generate_password(characters, length))
-elif letters == "n" and numbers == "y" and special == "y":
-    characters = string.digits + string.punctuation
-    print(generate_password(characters, length))
-elif letters == "y" and numbers == "n" and special == "y":
-    characters = string.ascii_letters + string.punctuation
-    print(generate_password(characters, length))
-elif letters == "n" and numbers == "y" and special == "n":
-    characters = string.digits
-    print(generate_password(characters, length))
-elif letters == "y" and numbers == "n" and special == "n":
-    characters = string.ascii_letters
-    print(generate_password(characters, length))
-elif letters == "n" and numbers == "n" and special == "y":
-    characters = string.punctuation
-    print(generate_password(characters, length))
-else:
-    print("Please input valid answers")
+if special == "y" or special == "Y":
+    characters_list.append(string.punctuation)
+
+characters = "".join(characters_list)
+password = "".join(random.choices(characters, k=length))
+print(f"Generate password: {password}")
