@@ -38,3 +38,5 @@ try:
             passwords_generated += 1
 except IndexError:
     print("Without any characters, I cannot generate a password")
+except ValueError:
+    print("Input valid number for length")
